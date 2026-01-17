@@ -6,6 +6,7 @@ import { Port } from "../lib/utils/index.ts";
 import listInsights from "./operations/list-insights.ts";
 import lookupInsight from "./operations/lookup-insight.ts";
 import { oakCors } from "https://deno.land/x/cors/mod.ts";
+import * as insightsTable from "$tables/insights.ts";
 
 console.log("Loading configuration");
 
@@ -19,10 +20,16 @@ console.log(`Opening SQLite database at ${dbFilePath}`);
 
 await Deno.mkdir(path.dirname(dbFilePath), { recursive: true });
 const db = new Database(dbFilePath);
+// db.exec(insightsTable.createTable);
 
 console.log("Initialising server");
 
 const router = new oak.Router();
+const app = new oak.Application();
+
+app.use(oakCors({
+  origin: "http://localhost:3000",
+}));
 
 router.get("/_health", (ctx) => {
   ctx.response.body = "OK";
@@ -50,11 +57,6 @@ router.get("/insights/delete", (ctx) => {
   // TODO
 });
 
-const app = new oak.Application();
-
-app.use(oakCors({
-  origin: "http://localhost:3000",
-}));
 app.use(router.routes());
 app.use(router.allowedMethods());
 
