@@ -21,7 +21,10 @@ export const AddInsight = (props: AddInsightProps) => {
         text,
         createdAt: new Date().toISOString(),
       }),
-    }).then(() => props.onClose())
+    }).then(() => {
+      globalThis.dispatchEvent(new CustomEvent('insight:created'))
+      props.onClose()
+    })
   }
 
   return (

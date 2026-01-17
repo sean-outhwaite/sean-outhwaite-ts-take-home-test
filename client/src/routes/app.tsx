@@ -11,6 +11,12 @@ export const App = () => {
     fetch(`http://localhost:8080/insights`).then(async (res) =>
       setInsights(await res.json()),
     )
+    const onCreated = () => {
+      fetch(`http://localhost:8080/insights`).then(async (res) => {
+        setInsights(await res.json())
+      })
+    }
+    globalThis.addEventListener('insight:created', onCreated)
   }, [])
 
   return (
