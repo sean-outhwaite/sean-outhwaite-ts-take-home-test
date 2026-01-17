@@ -5,6 +5,7 @@ import * as path from "@std/path";
 import { Port } from "../lib/utils/index.ts";
 import listInsights from "./operations/list-insights.ts";
 import lookupInsight from "./operations/lookup-insight.ts";
+import { oakCors } from "https://deno.land/x/cors/mod.ts";
 
 console.log("Loading configuration");
 
@@ -51,6 +52,9 @@ router.get("/insights/delete", (ctx) => {
 
 const app = new oak.Application();
 
+app.use(oakCors({
+  origin: "http://localhost:3000",
+}));
 app.use(router.routes());
 app.use(router.allowedMethods());
 
