@@ -52,6 +52,7 @@ router.get("/insights/:id", (ctx) => {
 
 router.post("/insights", async (ctx) => {
   const insight = await ctx.request.body.json();
+  console.log(insight);
   const result = createInsight({ db, ...insight });
   if (result === 1) ctx.response.status = 201;
   else ctx.response.status = 500;
