@@ -28,6 +28,7 @@
     "jsr:@std/path@1": "1.0.8",
     "jsr:@std/path@^1.0.8": "1.0.8",
     "jsr:@std/testing@^1.0.5": "1.0.9",
+    "jsr:@tajpouria/cors@^1.2.1": "1.2.1",
     "npm:@deno/vite-plugin@^1.0.2": "1.0.2_vite@6.0.3",
     "npm:@fontsource-variable/quicksand@^5.1.0": "5.1.0",
     "npm:@testing-library/dom@^10.4.0": "10.4.0",
@@ -179,6 +180,9 @@
         "jsr:@std/internal",
         "jsr:@std/path@^1.0.8"
       ]
+    },
+    "@tajpouria/cors@1.2.1": {
+      "integrity": "eca42e4fb7cb3906ef0ee3d1e565dd6bb4632ccd8e70a95cf4279759743328f0"
     }
   },
   "npm": {
@@ -615,8 +619,7 @@
         "react-dom"
       ],
       "optionalPeers": [
-        "@types/react",
-        "@types/react-dom@^18.0.0 || ^19.0.0"
+        "@types/react"
       ]
     },
     "@types/aria-query@5.0.4": {
@@ -689,7 +692,6 @@
         "vite"
       ],
       "optionalPeers": [
-        "msw@^2.4.9",
         "vite"
       ]
     },
@@ -929,7 +931,6 @@
         "tslib"
       ],
       "optionalPeers": [
-        "@emotion/is-prop-valid@*",
         "react",
         "react-dom"
       ]
@@ -1007,9 +1008,6 @@
         "whatwg-url",
         "ws",
         "xml-name-validator"
-      ],
-      "optionalPeers": [
-        "canvas@^2.11.2"
       ]
     },
     "jsesc@3.1.0": {
@@ -1290,19 +1288,6 @@
       "optionalDependencies": [
         "fsevents"
       ],
-      "optionalPeers": [
-        "@types/node@^18.0.0 || ^20.0.0 || >=22.0.0",
-        "jiti@>=1.21.0",
-        "less@*",
-        "lightningcss@^1.21.0",
-        "sass@*",
-        "sass-embedded@*",
-        "stylus@*",
-        "sugarss@*",
-        "terser@^5.16.0",
-        "tsx@^4.8.1",
-        "yaml@^2.4.2"
-      ],
       "bin": true
     },
     "vitest@3.0.2_jsdom@25.0.1_vite@6.0.3": {
@@ -1331,11 +1316,6 @@
         "why-is-node-running"
       ],
       "optionalPeers": [
-        "@edge-runtime/vm@*",
-        "@types/node@^18.0.0 || ^20.0.0 || >=22.0.0",
-        "@vitest/browser@3.0.2",
-        "@vitest/ui@3.0.2",
-        "happy-dom@*",
         "jsdom"
       ],
       "bin": true
@@ -1375,11 +1355,7 @@
       "bin": true
     },
     "ws@8.18.0": {
-      "integrity": "sha512-8VbfWfHLbbwu3+N6OKsOMpBdT4kXPDDB9cJk2bJ6mh9ucxdlnNvH1e+roYkKmN9Nxw2yjz7VzeO9oOz2zJ04Pw==",
-      "optionalPeers": [
-        "bufferutil@^4.0.1",
-        "utf-8-validate@>=5.0.2"
-      ]
+      "integrity": "sha512-8VbfWfHLbbwu3+N6OKsOMpBdT4kXPDDB9cJk2bJ6mh9ucxdlnNvH1e+roYkKmN9Nxw2yjz7VzeO9oOz2zJ04Pw=="
     },
     "xml-name-validator@5.0.0": {
       "integrity": "sha512-EvGK8EJ3DhaHfbRlETOWAS5pO9MZITeauHKJyb8wyajUfQUenkIg2MvLDTZ4T/TgIcm3HU0TFBgWWboAZ30UHg=="
@@ -1408,6 +1384,9 @@
     "https://deno.land/x/cors@v1.2.2/types.ts": "97546633ccc7f0df7a29bacba5d91dc6f61decdd1b65258300244dba905d34b8"
   },
   "workspace": {
+    "dependencies": [
+      "jsr:@tajpouria/cors@^1.2.1"
+    ],
     "members": {
       "client": {
         "dependencies": [

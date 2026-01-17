@@ -7,8 +7,7 @@ import listInsights from "./operations/list-insights.ts";
 import lookupInsight from "./operations/lookup-insight.ts";
 import createInsight from "./operations/add-insight.ts";
 import deleteInsight from "./operations/delete-insight.ts";
-import { oakCors } from "https://deno.land/x/cors/mod.ts";
-import * as insightsTable from "$tables/insights.ts";
+import { oakCors } from "@tajpouria/cors";
 
 console.log("Loading configuration");
 
