@@ -5,6 +5,7 @@ import * as path from "@std/path";
 import { Port } from "../lib/utils/index.ts";
 import listInsights from "./operations/list-insights.ts";
 import lookupInsight from "./operations/lookup-insight.ts";
+import createInsight from "./operations/add-insight.ts";
 import { oakCors } from "https://deno.land/x/cors/mod.ts";
 import * as insightsTable from "$tables/insights.ts";
 
@@ -49,8 +50,11 @@ router.get("/insights/:id", (ctx) => {
   ctx.response.status = 200;
 });
 
-router.get("/insights/create", (ctx) => {
-  // TODO
+router.post("/insights", async (ctx) => {
+  const insight = await ctx.request.body.json();
+  const result = createInsight({ db, ...insight });
+  if (result === 1) ctx.response.status = 201;
+  else ctx.response.status = 500;
 });
 
 router.get("/insights/delete", (ctx) => {
