@@ -6,6 +6,7 @@ import { Port } from "../lib/utils/index.ts";
 import listInsights from "./operations/list-insights.ts";
 import lookupInsight from "./operations/lookup-insight.ts";
 import createInsight from "./operations/add-insight.ts";
+import deleteInsight from "./operations/delete-insight.ts";
 import { oakCors } from "https://deno.land/x/cors/mod.ts";
 import * as insightsTable from "$tables/insights.ts";
 
@@ -58,8 +59,11 @@ router.post("/insights", async (ctx) => {
   else ctx.response.status = 500;
 });
 
-router.get("/insights/delete", (ctx) => {
-  // TODO
+router.delete("/insights/:id", (ctx) => {
+  const params = ctx.params as Record<string, any>;
+  const result = deleteInsight({ db, id: Number(params.id) });
+  if (result === 1) ctx.response.status = 200;
+  else ctx.response.status = 500;
 });
 
 app.use(router.routes());

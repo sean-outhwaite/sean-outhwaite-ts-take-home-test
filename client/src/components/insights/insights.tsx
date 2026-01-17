@@ -9,7 +9,13 @@ type InsightsProps = {
 }
 
 export const Insights = ({ insights, className }: InsightsProps) => {
-  const deleteInsight = () => undefined
+  const deleteInsight = (id: string) => {
+    fetch(`http://localhost:8080/insights/${id}`, {
+      method: 'DELETE',
+    }).then(() => {
+      globalThis.dispatchEvent(new CustomEvent('insight:created'))
+    })
+  }
 
   return (
     <div className={cx(className)}>
@@ -24,7 +30,7 @@ export const Insights = ({ insights, className }: InsightsProps) => {
                   <span>{new Date(createdAt).toString()}</span>
                   <Trash2Icon
                     className={styles['insight-delete']}
-                    onClick={deleteInsight}
+                    onClick={() => deleteInsight(String(id))}
                   />
                 </div>
               </div>
