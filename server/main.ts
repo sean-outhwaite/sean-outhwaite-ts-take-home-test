@@ -8,6 +8,7 @@ import lookupInsight from "./operations/lookup-insight.ts";
 import createInsight from "./operations/add-insight.ts";
 import deleteInsight from "./operations/delete-insight.ts";
 import { oakCors } from "@tajpouria/cors";
+import * as insightsTable from "$tables/insights.ts";
 
 console.log("Loading configuration");
 
@@ -21,7 +22,7 @@ console.log(`Opening SQLite database at ${dbFilePath}`);
 
 await Deno.mkdir(path.dirname(dbFilePath), { recursive: true });
 const db = new Database(dbFilePath);
-// db.exec(insightsTable.createTable);
+db.exec(insightsTable.createTable);
 
 console.log("Initialising server");
 
