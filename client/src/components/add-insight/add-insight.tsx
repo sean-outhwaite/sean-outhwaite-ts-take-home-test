@@ -47,6 +47,7 @@ export const AddInsight = (props: AddInsightProps) => {
             className={styles['field-input']}
             rows={5}
             placeholder="Something insightful..."
+            required
           />
         </label>
         <Button className={styles.submit} type="submit" label="Add insight" />
