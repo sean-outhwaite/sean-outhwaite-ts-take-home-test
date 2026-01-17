@@ -7,7 +7,9 @@ type Input = HasDBClient;
 export default (input: Input): Insight[] => {
   console.log("Listing insights");
 
-  const rows = input.db.sql<insightsTable.Row>`SELECT * FROM insights`;
+  const rows = input.db.sql<
+    insightsTable.Row
+  >`SELECT id, brand as brandId, text, createdAt as date FROM insights`;
 
   const result: Insight[] = rows.map((row) => ({
     ...row,
