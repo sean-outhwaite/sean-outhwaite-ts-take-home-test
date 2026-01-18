@@ -9,12 +9,18 @@ type InsightsProps = {
 }
 
 export const Insights = ({ insights, className }: InsightsProps) => {
-  const deleteInsight = (id: string) => {
-    fetch(`http://localhost:8080/insights/${id}`, {
-      method: 'DELETE',
-    }).then(() => {
+  const deleteInsight = async (id: string) => {
+    try {
+      const response = await fetch(`http://localhost:8080/insights/${id}`, {
+        method: 'DELETE',
+      })
+      if (!response.ok) {
+        throw new Error(`Failed to delete insight: ${response.statusText}`)
+      }
       globalThis.dispatchEvent(new CustomEvent('insight:created'))
-    })
+    } catch (err) {
+      console.error('Failed to delete insight:', err)
+    }
   }
 
   return (

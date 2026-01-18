@@ -11,6 +11,7 @@ export const App = () => {
     fetch(`http://localhost:8080/insights`).then(async (res) =>
       setInsights(await res.json()),
     )
+    // Used to refresh insights when a new one is created
     const onCreated = () => {
       fetch(`http://localhost:8080/insights`).then(async (res) => {
         setInsights(await res.json())

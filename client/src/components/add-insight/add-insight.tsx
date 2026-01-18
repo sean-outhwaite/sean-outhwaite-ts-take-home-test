@@ -6,25 +6,30 @@ import styles from './add-insight.module.css'
 type AddInsightProps = ModalProps
 
 export const AddInsight = (props: AddInsightProps) => {
-  const addInsight = (e: React.FormEvent<HTMLFormElement>) => {
+  const addInsight = async (e: React.FormEvent<HTMLFormElement>) => {
     const form = e.currentTarget as HTMLFormElement
     const formData = new FormData(form)
     const brand = String(formData.get('brand') ?? '0')
     const text = String(formData.get('text') ?? '')
 
     e.preventDefault()
-
-    fetch('http://localhost:8080/insights', {
-      method: 'POST',
-      body: JSON.stringify({
-        brand,
-        text,
-        createdAt: String(Date.now()),
-      }),
-    }).then(() => {
+    try {
+      const response = await fetch('http://localhost:8080/insights', {
+        method: 'POST',
+        body: JSON.stringify({
+          brand,
+          text,
+          createdAt: String(Date.now()),
+        }),
+      })
+      if (!response.ok) {
+        throw new Error(`Failed to add insight: ${response.statusText}`)
+      }
       globalThis.dispatchEvent(new CustomEvent('insight:created'))
       props.onClose()
-    })
+    } catch (err) {
+      console.error('Failed to add insight:', err)
+    }
   }
 
   return (
