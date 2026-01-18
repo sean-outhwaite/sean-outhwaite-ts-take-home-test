@@ -19,7 +19,7 @@ export const AddInsight = (props: AddInsightProps) => {
       body: JSON.stringify({
         brand,
         text,
-        createdAt: new Date().toISOString(),
+        createdAt: String(Date.now()),
       }),
     }).then(() => {
       globalThis.dispatchEvent(new CustomEvent('insight:created'))

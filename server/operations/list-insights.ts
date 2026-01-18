@@ -9,11 +9,11 @@ export default (input: Input): Insight[] => {
 
   const rows = input.db.sql<
     insightsTable.Row
-  >`SELECT id, brand as brandId, text, createdAt as date FROM insights`;
+  >`SELECT id, brand as brandId, text, createdAt as date, createdAt FROM insights`;
 
   const result: Insight[] = rows.map((row) => ({
     ...row,
-    createdAt: new Date(row.createdAt),
+    createdAt: new Date(Number(row.createdAt)),
   }));
 
   console.log("Retrieved insights successfully: ", result);
