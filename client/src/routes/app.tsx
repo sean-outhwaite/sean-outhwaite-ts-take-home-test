@@ -1,29 +1,29 @@
-import { useEffect, useState } from 'react'
-import { Header } from '../components/header/header.tsx'
-import { Insights } from '../components/insights/insights.tsx'
-import styles from './app.module.css'
-import type { Insight } from '../schemas/insight.ts'
+import { useEffect, useState } from "react";
+import { Header } from "../components/header/header.tsx";
+import { Insights } from "../components/insights/insights.tsx";
+import styles from "./app.module.css";
+import type { Insight } from "../schemas/insight.ts";
 
 export const App = () => {
-  const [insights, setInsights] = useState<Insight[]>([])
+  const [insights, setInsights] = useState<Insight[]>([]);
 
   useEffect(() => {
     fetch(`http://localhost:8080/insights`).then(async (res) =>
-      setInsights(await res.json()),
-    )
+      setInsights(await res.json())
+    );
     // Used to refresh insights when a new one is created
     const onCreated = () => {
       fetch(`http://localhost:8080/insights`).then(async (res) => {
-        setInsights(await res.json())
-      })
-    }
-    globalThis.addEventListener('insight:created', onCreated)
-  }, [])
+        setInsights(await res.json());
+      });
+    };
+    globalThis.addEventListener("insight:created", onCreated);
+  }, []);
 
   return (
     <main className={styles.main}>
       <Header />
       <Insights className={styles.insights} insights={insights} />
     </main>
-  )
-}
+  );
+};
