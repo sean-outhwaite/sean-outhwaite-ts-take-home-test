@@ -1,21 +1,21 @@
-import { render, screen } from "@testing-library/react";
-import { describe, expect, it } from "vitest";
-import { Modal } from "./modal.tsx";
+import { render, screen } from '@testing-library/react'
+import { describe, expect, it } from 'vitest'
+import { Modal } from './modal.tsx'
 
-describe("Modal", () => {
-  it("should open and close", () => {
+describe('Modal', () => {
+  it('should open and close', () => {
     render(
       <Modal open={false} onClose={() => undefined}>
         Closed modal
       </Modal>,
-    );
-    expect(screen.queryByText("Closed modal")).toBeFalsy();
+    )
+    expect(screen.queryByText('Closed modal')).toBeFalsy()
 
     render(
-      <Modal open={true} onClose={() => undefined}>
+      <Modal open onClose={() => undefined}>
         <div>Open modal</div>
       </Modal>,
-    );
-    expect(screen.getByText("Open modal")).toBeTruthy();
-  });
-});
+    )
+    expect(screen.getByText('Open modal')).toBeTruthy()
+  })
+})
